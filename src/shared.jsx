@@ -63,6 +63,8 @@ const VARIANTS = [
   { key:"brief",    no:"03", name:"Зведення командиру", tag:"світла доповідь",    theme:"light" },
   { key:"terminal", no:"04", name:"Термінал обліку",    tag:"моноширинний",       theme:"dark"  },
   { key:"board",    no:"05", name:"Дошка готовності",   tag:"статусна дошка",     theme:"dark"  },
+  { key:"ledger",   no:"06", name:"Журнал руху",        tag:"добовий облік",      theme:"dark"  },
+  { key:"ledgerlt", no:"07", name:"Відомість руху",     tag:"світла довідка",     theme:"light" },
 ];
 
 function Shell(){
@@ -76,6 +78,7 @@ function Shell(){
   const Variants = {
     command: window.VCommand, blueprint: window.VBlueprint,
     brief: window.VBrief, terminal: window.VTerminal, board: window.VBoard,
+    ledger: window.VLedger, ledgerlt: window.VLedgerLight,
   };
   const Cur = Variants[active] || (()=> <div style={{padding:40}}>…</div>);
   const meta = VARIANTS.find(v=>v.key===active);
@@ -100,7 +103,7 @@ function Shell(){
           ))}
         </div>
         <div className="sw-hint">
-          <span className="sw-demo">ДЕМО · {meta.no}/05</span>
+          <span className="sw-demo">ДЕМО · {meta.no}/07</span>
           <span className="sw-key">демонстрація варіантів інтерфейсу</span>
         </div>
       </div>
