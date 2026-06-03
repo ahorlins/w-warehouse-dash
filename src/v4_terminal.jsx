@@ -91,7 +91,7 @@ function VTerminal(){
               <span className="lbl">придатні до застосування<br/>готові <b>{fmt(fleetTotals.rdy)}</b> · видано <b>{fmt(fleetTotals.iss)}</b> · ремонт <b>{fmt(fleetTotals.rep)}</b></span></div>
           </div>
 
-          <div className="blk"><span className="bh">[ FPV · ДОВЖИНА ОПТОВОЛОКНА (ВОЛЗ) ]</span>
+          <div className="blk"><span className="bh">[ FPV · ДОВЖИНА ОПТОВОЛОКНА (ОВ) ]</span>
             <table className="led"><thead><tr><th>ТИП</th><th>ЗАВАНТАЖЕННЯ</th><th className="r">ГОТ.</th><th className="r">ВИД.</th><th className="r">РЕМ.</th><th className="r">ВСЬОГО</th></tr></thead>
               <tbody>{FIBER.map(f=>{const tot=f.rdy+f.iss+f.rep;const mx=Math.max(...FIBER.map(x=>x.rdy+x.iss+x.rep));
                 return(<tr key={f.label}><td className="nm">{f.len.padEnd(6," ")}</td><td>{meter(tot/mx*100,16)}</td>

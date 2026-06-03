@@ -9,13 +9,13 @@ const uahF = (n) => fmt(n) + " ₴";
 // ---------- 1. БОЄГОТОВНІСТЬ (зведено) ----------
 const READINESS = 91;
 
-// ---------- 2. FPV за ДОВЖИНОЮ ОПТОВОЛОКНА (ВОЛЗ) ----------
+// ---------- 2. FPV за ДОВЖИНОЮ ОПТОВОЛОКНА (ОВ) ----------
 //  rdy = на складі готові · iss = видано · rep = ремонт/ТО
 const FIBER = [
-  { len: "5 км",  label: "ВОЛЗ 5 км",  rdy: 612, iss: 188, rep: 41, note: "штурмові, ближній радіус" },
-  { len: "10 км", label: "ВОЛЗ 10 км", rdy: 740, iss: 264, rep: 58, note: "основний робочий тип" },
-  { len: "15 км", label: "ВОЛЗ 15 км", rdy: 268, iss: 142, rep: 33, note: "глибина / логістика пр-ка" },
-  { len: "20 км", label: "ВОЛЗ 20 км", rdy: 96,  iss: 58,  rep: 19, note: "дальній рубіж" },
+  { len: "5 км",  label: "ОВ 5 км",  rdy: 612, iss: 188, rep: 41, note: "штурмові, ближній радіус" },
+  { len: "10 км", label: "ОВ 10 км", rdy: 740, iss: 264, rep: 58, note: "основний робочий тип" },
+  { len: "15 км", label: "ОВ 15 км", rdy: 268, iss: 142, rep: 33, note: "глибина / логістика пр-ка" },
+  { len: "20 км", label: "ОВ 20 км", rdy: 96,  iss: 58,  rep: 19, note: "дальній рубіж" },
   { len: "Радіо", label: "Радіоканал", rdy: 410, iss: 196, rep: 64, note: "FPV без оптоволокна" },
 ];
 const fiberTot = FIBER.reduce((a,f)=>({rdy:a.rdy+f.rdy,iss:a.iss+f.iss,rep:a.rep+f.rep}),{rdy:0,iss:0,rep:0});
@@ -72,7 +72,7 @@ const activeUnits = UNITS.length;
 
 // ---------- 6. ЗОНИ СКЛАДУ ----------
 const ZONES = [
-  { id:"A", area:"a", nm:"Стелажі FPV · ВОЛЗ",      occ:81, units:2210, flag:"ok",    note:null },
+  { id:"A", area:"a", nm:"Стелажі FPV · ОВ",      occ:81, units:2210, flag:"ok",    note:null },
   { id:"B", area:"b", nm:"Зарядна · АКБ",            occ:67, units:1676, flag:"amber", note:"ЗАРЯД" },
   { id:"C", area:"c", nm:"Розвідка DJI / Autel",     occ:44, units:682,  flag:"ok",    note:null },
   { id:"D", area:"d", nm:"Запчастини · витратні",    occ:88, units:3300, flag:"red",   note:"ПОВНО" },
@@ -94,7 +94,7 @@ const incomingActive = INCOMING.filter(i=>i.status!=="done").length;
 
 // ---------- 8. ЖИВА СТРІЧКА ----------
 const LOG_SEED = [
-  { g:"issue", t:"ВИДАЧА",  x:'<b>1 МБ РБпАК</b> — видано 96× Vyriy Opto 10 (ВОЛЗ 10 км)' },
+  { g:"issue", t:"ВИДАЧА",  x:'<b>1 МБ РБпАК</b> — видано 96× Vyriy Opto 10 (ОВ 10 км)' },
   { g:"ret",   t:"ПОВЕРН.", x:'<b>РР</b> — повернуто 2× Autel EVO MAX, 1× у ТО' },
   { g:"in",    t:"ПРИЙОМ",  x:'Поставка #2210: <b>+300</b> Vyriy Opto 10 оприбутковано' },
   { g:"rep",   t:"РЕМОНТ",  x:'Shrike #SHR-1180 → діагностика: обрив оптоволокна' },
@@ -111,7 +111,7 @@ const LOG_SEED = [
   { g:"issue", t:"ВИДАЧА",  x:'<b>3 МБ РБпАК</b> — видано 60× Blink 10 dualband' },
 ];
 const INITIAL_LOG = [
-  { id:0, time:"10:42", g:"issue", t:"ВИДАЧА",  x:'<b>1 МБ РБпАК</b> — видано 96× Vyriy Opto 10 (ВОЛЗ 10 км)' },
+  { id:0, time:"10:42", g:"issue", t:"ВИДАЧА",  x:'<b>1 МБ РБпАК</b> — видано 96× Vyriy Opto 10 (ОВ 10 км)' },
   { id:1, time:"10:31", g:"in",    t:"ПРИЙОМ",  x:'Поставка #2210: <b>+300</b> Vyriy Opto 10' },
   { id:2, time:"10:18", g:"alert", t:"ТРИВОГА", x:'Щогла Avenger <b>критичний рівень</b> (22 / 30)' },
   { id:3, time:"09:54", g:"ret",   t:"ПОВЕРН.", x:'<b>РР</b> — повернуто станцію керування #03' },

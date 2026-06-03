@@ -140,7 +140,7 @@ function VBlueprint(){
         </div>
 
         <div className="stripe">
-          <div className="scell"><div className="sl">FPV у парку</div><div className="sv">{fmt(fleetTotal)}</div><div className="sf">за довжиною ВОЛЗ</div></div>
+          <div className="scell"><div className="sl">FPV у парку</div><div className="sv">{fmt(fleetTotal)}</div><div className="sf">за довжиною ОВ</div></div>
           <div className="scell"><div className="sl">Платформи DJI / Autel</div><div className="sv">{fmt(platTot)}</div><div className="sf">розвідка + ударні</div></div>
           <div className="scell"><div className="sl">Видано підрозділам</div><div className="sv">{fmt(fleetTotals.iss)}</div><div className="sf">{activeUnits} отримувачів</div></div>
           <div className="scell"><div className="sl">Низький запас</div><div className="sv" style={{color:"var(--amber)"}}>{lowStockCount}</div><div className="sf">позицій потребують</div></div>

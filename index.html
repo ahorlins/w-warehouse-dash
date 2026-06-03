@@ -77,13 +77,13 @@ const uahF = (n) => fmt(n) + " ₴";
 // ---------- 1. БОЄГОТОВНІСТЬ (зведено) ----------
 const READINESS = 91;
 
-// ---------- 2. FPV за ДОВЖИНОЮ ОПТОВОЛОКНА (ВОЛЗ) ----------
+// ---------- 2. FPV за ДОВЖИНОЮ ОПТОВОЛОКНА (ОВ) ----------
 //  rdy = на складі готові · iss = видано · rep = ремонт/ТО
 const FIBER = [
-  { len: "5 км",  label: "ВОЛЗ 5 км",  rdy: 612, iss: 188, rep: 41, note: "штурмові, ближній радіус" },
-  { len: "10 км", label: "ВОЛЗ 10 км", rdy: 740, iss: 264, rep: 58, note: "основний робочий тип" },
-  { len: "15 км", label: "ВОЛЗ 15 км", rdy: 268, iss: 142, rep: 33, note: "глибина / логістика пр-ка" },
-  { len: "20 км", label: "ВОЛЗ 20 км", rdy: 96,  iss: 58,  rep: 19, note: "дальній рубіж" },
+  { len: "5 км",  label: "ОВ 5 км",  rdy: 612, iss: 188, rep: 41, note: "штурмові, ближній радіус" },
+  { len: "10 км", label: "ОВ 10 км", rdy: 740, iss: 264, rep: 58, note: "основний робочий тип" },
+  { len: "15 км", label: "ОВ 15 км", rdy: 268, iss: 142, rep: 33, note: "глибина / логістика пр-ка" },
+  { len: "20 км", label: "ОВ 20 км", rdy: 96,  iss: 58,  rep: 19, note: "дальній рубіж" },
   { len: "Радіо", label: "Радіоканал", rdy: 410, iss: 196, rep: 64, note: "FPV без оптоволокна" },
 ];
 const fiberTot = FIBER.reduce((a,f)=>({rdy:a.rdy+f.rdy,iss:a.iss+f.iss,rep:a.rep+f.rep}),{rdy:0,iss:0,rep:0});
@@ -140,7 +140,7 @@ const activeUnits = UNITS.length;
 
 // ---------- 6. ЗОНИ СКЛАДУ ----------
 const ZONES = [
-  { id:"A", area:"a", nm:"Стелажі FPV · ВОЛЗ",      occ:81, units:2210, flag:"ok",    note:null },
+  { id:"A", area:"a", nm:"Стелажі FPV · ОВ",      occ:81, units:2210, flag:"ok",    note:null },
   { id:"B", area:"b", nm:"Зарядна · АКБ",            occ:67, units:1676, flag:"amber", note:"ЗАРЯД" },
   { id:"C", area:"c", nm:"Розвідка DJI / Autel",     occ:44, units:682,  flag:"ok",    note:null },
   { id:"D", area:"d", nm:"Запчастини · витратні",    occ:88, units:3300, flag:"red",   note:"ПОВНО" },
@@ -162,7 +162,7 @@ const incomingActive = INCOMING.filter(i=>i.status!=="done").length;
 
 // ---------- 8. ЖИВА СТРІЧКА ----------
 const LOG_SEED = [
-  { g:"issue", t:"ВИДАЧА",  x:'<b>1 МБ РБпАК</b> — видано 96× Vyriy Opto 10 (ВОЛЗ 10 км)' },
+  { g:"issue", t:"ВИДАЧА",  x:'<b>1 МБ РБпАК</b> — видано 96× Vyriy Opto 10 (ОВ 10 км)' },
   { g:"ret",   t:"ПОВЕРН.", x:'<b>РР</b> — повернуто 2× Autel EVO MAX, 1× у ТО' },
   { g:"in",    t:"ПРИЙОМ",  x:'Поставка #2210: <b>+300</b> Vyriy Opto 10 оприбутковано' },
   { g:"rep",   t:"РЕМОНТ",  x:'Shrike #SHR-1180 → діагностика: обрив оптоволокна' },
@@ -179,7 +179,7 @@ const LOG_SEED = [
   { g:"issue", t:"ВИДАЧА",  x:'<b>3 МБ РБпАК</b> — видано 60× Blink 10 dualband' },
 ];
 const INITIAL_LOG = [
-  { id:0, time:"10:42", g:"issue", t:"ВИДАЧА",  x:'<b>1 МБ РБпАК</b> — видано 96× Vyriy Opto 10 (ВОЛЗ 10 км)' },
+  { id:0, time:"10:42", g:"issue", t:"ВИДАЧА",  x:'<b>1 МБ РБпАК</b> — видано 96× Vyriy Opto 10 (ОВ 10 км)' },
   { id:1, time:"10:31", g:"in",    t:"ПРИЙОМ",  x:'Поставка #2210: <b>+300</b> Vyriy Opto 10' },
   { id:2, time:"10:18", g:"alert", t:"ТРИВОГА", x:'Щогла Avenger <b>критичний рівень</b> (22 / 30)' },
   { id:3, time:"09:54", g:"ret",   t:"ПОВЕРН.", x:'<b>РР</b> — повернуто станцію керування #03' },
@@ -533,7 +533,7 @@ function VCommand(){
   return(<div className="v-cmd"><style dangerouslySetInnerHTML={{__html:VCMD_CSS}}/>
     <div className="kpis">
       <div className="kpi ag"><div className="lab">Боєготовність</div><div className="num">{READINESS}<span className="u">%</span></div><div className="foot"><span className="trend up">▲ +2%</span> за добу</div></div>
-      <div className="kpi ac2"><div className="lab">FPV у парку</div><div className="num">{fmt(fleetTotal)}</div><div className="foot">5 типів за ВОЛЗ</div></div>
+      <div className="kpi ac2"><div className="lab">FPV у парку</div><div className="num">{fmt(fleetTotal)}</div><div className="foot">5 типів за ОВ</div></div>
       <div className="kpi ac2"><div className="lab">Платформи DJI/Autel</div><div className="num">{fmt(platTot)}</div><div className="foot">розвідка + ударні</div></div>
       <div className="kpi aa"><div className="lab">Видано підрозділам</div><div className="num">{fmt(fleetTotals.iss)}</div><div className="foot">{activeUnits} отримувачів</div></div>
       <div className="kpi ar"><div className="lab">Ремонт / ТО</div><div className="num">{fmt(fleetTotals.rep)}</div><div className="foot"><span className="trend down">▼ −6</span> за добу</div></div>
@@ -699,7 +699,7 @@ function VBlueprint(){
         </div>
 
         <div className="stripe">
-          <div className="scell"><div className="sl">FPV у парку</div><div className="sv">{fmt(fleetTotal)}</div><div className="sf">за довжиною ВОЛЗ</div></div>
+          <div className="scell"><div className="sl">FPV у парку</div><div className="sv">{fmt(fleetTotal)}</div><div className="sf">за довжиною ОВ</div></div>
           <div className="scell"><div className="sl">Платформи DJI / Autel</div><div className="sv">{fmt(platTot)}</div><div className="sf">розвідка + ударні</div></div>
           <div className="scell"><div className="sl">Видано підрозділам</div><div className="sv">{fmt(fleetTotals.iss)}</div><div className="sf">{activeUnits} отримувачів</div></div>
           <div className="scell"><div className="sl">Низький запас</div><div className="sv" style={{color:"var(--amber)"}}>{lowStockCount}</div><div className="sf">позицій потребують</div></div>
@@ -866,7 +866,7 @@ function VBrief(){
 
       <div className="sech"><span className="sn">§1</span> Парк FPV за довжиною оптоволокна</div>
       <div className="cols">
-        <div className="card"><h3>Розподіл за ВОЛЗ <span className="tot">{fmt(fleetTotal)} од.</span></h3><BrFiber/></div>
+        <div className="card"><h3>Розподіл за ОВ <span className="tot">{fmt(fleetTotal)} од.</span></h3><BrFiber/></div>
         <div className="card"><h3>Платформи розвідки <span className="tot">Tier 1</span></h3>
           <table><thead><tr><th>Сімейство</th><th className="r">К-сть</th><th className="r">Готові</th><th className="r">Вартість од.</th></tr></thead>
             <tbody>{t1.map(p=>(<tr key={p.code}><td><span className="pf">{p.fam}</span> <span className="pc">{p.code}</span></td>
@@ -1012,7 +1012,7 @@ function VTerminal(){
               <span className="lbl">придатні до застосування<br/>готові <b>{fmt(fleetTotals.rdy)}</b> · видано <b>{fmt(fleetTotals.iss)}</b> · ремонт <b>{fmt(fleetTotals.rep)}</b></span></div>
           </div>
 
-          <div className="blk"><span className="bh">[ FPV · ДОВЖИНА ОПТОВОЛОКНА (ВОЛЗ) ]</span>
+          <div className="blk"><span className="bh">[ FPV · ДОВЖИНА ОПТОВОЛОКНА (ОВ) ]</span>
             <table className="led"><thead><tr><th>ТИП</th><th>ЗАВАНТАЖЕННЯ</th><th className="r">ГОТ.</th><th className="r">ВИД.</th><th className="r">РЕМ.</th><th className="r">ВСЬОГО</th></tr></thead>
               <tbody>{FIBER.map(f=>{const tot=f.rdy+f.iss+f.rep;const mx=Math.max(...FIBER.map(x=>x.rdy+x.iss+x.rep));
                 return(<tr key={f.label}><td className="nm">{f.len.padEnd(6," ")}</td><td>{meter(tot/mx*100,16)}</td>
@@ -1164,13 +1164,13 @@ function BdFeed(){
 
 function VBoard(){
   const now=useClock();
-  // картки «на складі» — топ платформи + FPV за ВОЛЗ
-  const fiberReady=FIBER.map(f=>({name:"FPV "+f.label,qty:f.rdy,kk:"kk-g",tag:"ВОЛЗ",tagcls:"tg-str",meta:f.len,bar:f.rdy/(f.rdy+f.iss+f.rep)*100}));
+  // картки «на складі» — топ платформи + FPV за ОВ
+  const fiberReady=FIBER.map(f=>({name:"FPV "+f.label,qty:f.rdy,kk:"kk-g",tag:"ОВ",tagcls:"tg-str",meta:f.len,bar:f.rdy/(f.rdy+f.iss+f.rep)*100}));
   const platReady=PLATFORMS.filter(p=>p.t===1).map(p=>({name:p.fam,qty:p.rdy,kk:"kk-c",tag:"розвідка",tagcls:"tg-rec",meta:p.code,bar:p.rdy/p.qty*100}));
   const readyCards=[...fiberReady,...platReady];
   const issuedCards=UNITS.map(u=>({name:u.u,qty:u.cnt,kk:u.status==="active"?"kk-a":"kk-v",tag:u.status==="active"?"активний":"черга",tagcls:"",meta:u.holds.split(",")[0]}));
   const repCards=[
-    {name:"Shrike 10 / 10T",qty:110,kk:"kk-r",tag:"FPV",tagcls:"tg-str",meta:"обрив ВОЛЗ ·14"},
+    {name:"Shrike 10 / 10T",qty:110,kk:"kk-r",tag:"FPV",tagcls:"tg-str",meta:"обрив ОВ ·14"},
     {name:"Vyriy Opto 10",qty:100,kk:"kk-r",tag:"FPV",tagcls:"tg-str",meta:"камера ·9"},
     {name:"Blink 10 dualband",qty:75,kk:"kk-r",tag:"FPV",tagcls:"tg-str",meta:"VTX ·6"},
     {name:"DJI Mavic 3T",qty:20,kk:"kk-r",tag:"розвідка",tagcls:"tg-rec",meta:"ТО планове"},
@@ -1186,7 +1186,7 @@ function VBoard(){
 
     <div className="ribbon">
       <div className="rcell"><div className="rl">Боєготовність</div><div className="rv">{READINESS}<span className="u">%</span></div><div className="rf">+2% за добу</div></div>
-      <div className="rcell"><div className="rl">FPV у парку</div><div className="rv">{fmt(fleetTotal)}</div><div className="rf">5 типів ВОЛЗ
+      <div className="rcell"><div className="rl">FPV у парку</div><div className="rv">{fmt(fleetTotal)}</div><div className="rf">5 типів ОВ
         <span className="spark">{[8,12,7,14,10,16].map((h,i)=><i key={i} style={{height:h}}></i>)}</span></div></div>
       <div className="rcell"><div className="rl">Платформи DJI/Autel</div><div className="rv">{fmt(platTot)}</div><div className="rf">розвідка + ударні</div></div>
       <div className="rcell"><div className="rl">Видано</div><div className="rv">{fmt(fleetTotals.iss)}</div><div className="rf">{activeUnits} підрозділів</div></div>

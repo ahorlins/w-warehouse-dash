@@ -209,7 +209,7 @@ function VCommand(){
   return(<div className="v-cmd"><style dangerouslySetInnerHTML={{__html:VCMD_CSS}}/>
     <div className="kpis">
       <div className="kpi ag"><div className="lab">Боєготовність</div><div className="num">{READINESS}<span className="u">%</span></div><div className="foot"><span className="trend up">▲ +2%</span> за добу</div></div>
-      <div className="kpi ac2"><div className="lab">FPV у парку</div><div className="num">{fmt(fleetTotal)}</div><div className="foot">5 типів за ВОЛЗ</div></div>
+      <div className="kpi ac2"><div className="lab">FPV у парку</div><div className="num">{fmt(fleetTotal)}</div><div className="foot">5 типів за ОВ</div></div>
       <div className="kpi ac2"><div className="lab">Платформи DJI/Autel</div><div className="num">{fmt(platTot)}</div><div className="foot">розвідка + ударні</div></div>
       <div className="kpi aa"><div className="lab">Видано підрозділам</div><div className="num">{fmt(fleetTotals.iss)}</div><div className="foot">{activeUnits} отримувачів</div></div>
       <div className="kpi ar"><div className="lab">Ремонт / ТО</div><div className="num">{fmt(fleetTotals.rep)}</div><div className="foot"><span className="trend down">▼ −6</span> за добу</div></div>

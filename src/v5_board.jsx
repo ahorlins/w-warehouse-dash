@@ -98,13 +98,13 @@ function BdFeed(){
 
 function VBoard(){
   const now=useClock();
-  // картки «на складі» — топ платформи + FPV за ВОЛЗ
-  const fiberReady=FIBER.map(f=>({name:"FPV "+f.label,qty:f.rdy,kk:"kk-g",tag:"ВОЛЗ",tagcls:"tg-str",meta:f.len,bar:f.rdy/(f.rdy+f.iss+f.rep)*100}));
+  // картки «на складі» — топ платформи + FPV за ОВ
+  const fiberReady=FIBER.map(f=>({name:"FPV "+f.label,qty:f.rdy,kk:"kk-g",tag:"ОВ",tagcls:"tg-str",meta:f.len,bar:f.rdy/(f.rdy+f.iss+f.rep)*100}));
   const platReady=PLATFORMS.filter(p=>p.t===1).map(p=>({name:p.fam,qty:p.rdy,kk:"kk-c",tag:"розвідка",tagcls:"tg-rec",meta:p.code,bar:p.rdy/p.qty*100}));
   const readyCards=[...fiberReady,...platReady];
   const issuedCards=UNITS.map(u=>({name:u.u,qty:u.cnt,kk:u.status==="active"?"kk-a":"kk-v",tag:u.status==="active"?"активний":"черга",tagcls:"",meta:u.holds.split(",")[0]}));
   const repCards=[
-    {name:"Shrike 10 / 10T",qty:110,kk:"kk-r",tag:"FPV",tagcls:"tg-str",meta:"обрив ВОЛЗ ·14"},
+    {name:"Shrike 10 / 10T",qty:110,kk:"kk-r",tag:"FPV",tagcls:"tg-str",meta:"обрив ОВ ·14"},
     {name:"Vyriy Opto 10",qty:100,kk:"kk-r",tag:"FPV",tagcls:"tg-str",meta:"камера ·9"},
     {name:"Blink 10 dualband",qty:75,kk:"kk-r",tag:"FPV",tagcls:"tg-str",meta:"VTX ·6"},
     {name:"DJI Mavic 3T",qty:20,kk:"kk-r",tag:"розвідка",tagcls:"tg-rec",meta:"ТО планове"},
@@ -120,7 +120,7 @@ function VBoard(){
 
     <div className="ribbon">
       <div className="rcell"><div className="rl">Боєготовність</div><div className="rv">{READINESS}<span className="u">%</span></div><div className="rf">+2% за добу</div></div>
-      <div className="rcell"><div className="rl">FPV у парку</div><div className="rv">{fmt(fleetTotal)}</div><div className="rf">5 типів ВОЛЗ
+      <div className="rcell"><div className="rl">FPV у парку</div><div className="rv">{fmt(fleetTotal)}</div><div className="rf">5 типів ОВ
         <span className="spark">{[8,12,7,14,10,16].map((h,i)=><i key={i} style={{height:h}}></i>)}</span></div></div>
       <div className="rcell"><div className="rl">Платформи DJI/Autel</div><div className="rv">{fmt(platTot)}</div><div className="rf">розвідка + ударні</div></div>
       <div className="rcell"><div className="rl">Видано</div><div className="rv">{fmt(fleetTotals.iss)}</div><div className="rf">{activeUnits} підрозділів</div></div>

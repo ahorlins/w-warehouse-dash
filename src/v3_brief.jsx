@@ -119,7 +119,7 @@ function VBrief(){
 
       <div className="sech"><span className="sn">§1</span> Парк FPV за довжиною оптоволокна</div>
       <div className="cols">
-        <div className="card"><h3>Розподіл за ВОЛЗ <span className="tot">{fmt(fleetTotal)} од.</span></h3><BrFiber/></div>
+        <div className="card"><h3>Розподіл за ОВ <span className="tot">{fmt(fleetTotal)} од.</span></h3><BrFiber/></div>
         <div className="card"><h3>Платформи розвідки <span className="tot">Tier 1</span></h3>
           <table><thead><tr><th>Сімейство</th><th className="r">К-сть</th><th className="r">Готові</th><th className="r">Вартість од.</th></tr></thead>
             <tbody>{t1.map(p=>(<tr key={p.code}><td><span className="pf">{p.fam}</span> <span className="pc">{p.code}</span></td>
